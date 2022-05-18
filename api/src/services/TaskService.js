@@ -13,6 +13,11 @@ async function getAll() {
   return tasks;
 }
 
+async function create() {
+  await TaskModel.create();
+}
+
 module.exports = {
   getAll,
+  create,
 };
