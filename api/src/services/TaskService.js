@@ -13,8 +13,8 @@ async function getAll() {
   return tasks;
 }
 
-async function create() {
-  await TaskModel.create();
+async function create(task) {
+  await TaskModel.create(task);
 }
 
 module.exports = {
