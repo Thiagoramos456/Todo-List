@@ -1,6 +1,6 @@
 const TaskModel = require('../models/TaskModel');
 
-export default function getAll() {
-  const tasks = TaskModel.getAll();
+export default async function getAll() {
+  const tasks = await TaskModel.getAll();
   return tasks;
 }
