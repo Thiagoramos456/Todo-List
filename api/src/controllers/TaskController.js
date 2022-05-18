@@ -4,7 +4,7 @@ async function getAll(_req, res) {
   const tasks = await TaskService.getAll();
 
   if (tasks.error) {
-    return res.status(tasks.status).json(tasks.error);
+    return res.status(tasks.status).json({ error: tasks.error });
   }
 
   return res.status(200).json(tasks);

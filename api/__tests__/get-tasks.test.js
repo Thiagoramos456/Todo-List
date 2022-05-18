@@ -22,12 +22,10 @@ describe('GET /tasks', () => {
 
     it('O status deve ser 200 OK', async () => {
       expect(res).to.have.status(200);
-      expect(res.body).to.be.deep.equal(tasksMock);
     });
 
     it('O retorno deve ser um array', async () => {
       expect(res.body).to.be.an('array');
-      expect(res.body).to.have.length(3);
     });
 
     it('O retorno deve ser um array de tasks', async () => {
@@ -49,12 +47,12 @@ describe('GET /tasks', () => {
       expect(res).to.have.status(404);
     });
 
-    it('O retorno deve ser uma string', async () => {
-      expect(res.body).to.be.an('string');
+    it('O retorno deve ser um objeto com o erro', async () => {
+      expect(res.body).to.be.an('object');
     });
 
     it('O retorno deve ser uma mensagem de erro', async () => {
-      expect(res.body).to.be.equal('Nenhuma task encontrada');
+      expect(res.body.error).to.be.equal('Nenhuma task encontrada');
     });
 
     after(() => {

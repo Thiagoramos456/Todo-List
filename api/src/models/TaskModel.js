@@ -5,7 +5,6 @@ async function getAll() {
   return tasks ? tasks : [];
 }
 
-
 module.exports = {
   getAll,
 };
