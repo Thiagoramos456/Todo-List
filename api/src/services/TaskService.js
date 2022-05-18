@@ -14,7 +14,7 @@ async function getAll() {
 }
 
 async function create(task) {
-  // await TaskModel.create(task);
+  await TaskModel.create(task);
 
   return {
     message: 'Tarefa criada com sucesso',
@@ -22,7 +22,16 @@ async function create(task) {
   };
 }
 
+async function edit(task) {
+  await TaskModel.edit(task);
+  return {
+    message: 'Tarefa alterada com sucesso',
+    status: 200,
+  }
+}
+
 module.exports = {
   getAll,
   create,
+  edit,
 };
