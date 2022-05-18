@@ -5,18 +5,17 @@ const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 
 const app = require('../src/index');
-const { correctAlterMock } = require('./mocks/editTask');
 const TaskModel = require('../src/models/TaskModel');
 
 const { expect } = chai;
 
-describe('PUT /tasks', () => {
+describe('DELETE /tasks', () => {
   let res;
 
   describe('Quando a task é excluída com sucesso', () => {
     before(async () => {
       sinon.stub(TaskModel, 'exclude').resolves();
-      res = await chai.request(app).put('/tasks').send(correctAlterMock);
+      res = await chai.request(app).delete('/tasks/1');
     });
 
     it('O status deve ser 200 OK', () => {
