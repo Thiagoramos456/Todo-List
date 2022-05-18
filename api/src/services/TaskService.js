@@ -14,7 +14,12 @@ async function getAll() {
 }
 
 async function create(task) {
-  await TaskModel.create(task);
+  // await TaskModel.create(task);
+
+  return {
+    message: 'Tarefa criada com sucesso',
+    status: 201,
+  };
 }
 
 module.exports = {

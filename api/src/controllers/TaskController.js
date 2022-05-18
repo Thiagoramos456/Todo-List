@@ -13,11 +13,12 @@ async function getAll(_req, res) {
 async function create(req, res) {
   const task = req.body;
 
-  await TaskService.create(task);
+  const response = await TaskService.create(task);
 
-  return res.status(201).json({ message: 'Tarefa criada com sucesso' });
+  return res.status(response.status).json({ message: response.message });
 }
 
 module.exports = {
   getAll,
+  create,
 };

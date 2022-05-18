@@ -8,7 +8,7 @@ async function getAll() {
 async function create({ title, description, status }) {
   await connection.execute(
     'INSERT INTO tasks (title, description, status) VALUES (?, ?, ?)',
-    [title, description, status]
+    [title, description, status],
   );
 }
 

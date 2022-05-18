@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./__tests__/**/*$NAME*.test.js --exit",
+    "test": "mocha ./__tests__/**/*$NAME*.test.js --timeout 3000 --exit",
     "debug": "nodemon ./src/index.js",
     "start": "node ./src/index.js"
   },

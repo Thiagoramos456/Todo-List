@@ -7,7 +7,7 @@ chai.use(chaiHttp);
 const connection = require('../src/models/connection');
 const app = require('../src/index');
 
-const tasksMock = require('./mocks/tasks');
+const tasksMock = require('./mocks/getTasks');
 
 const { expect } = chai;
 
@@ -43,15 +43,15 @@ describe('GET /tasks', () => {
       res = await chai.request(app).get('/tasks');
     });
 
-    it('O status deve ser 404 NOT FOUND', async () => {
+    it('O status deve ser 404 NOT FOUND', () => {
       expect(res).to.have.status(404);
     });
 
-    it('O retorno deve ser um objeto com o erro', async () => {
+    it('O retorno deve ser um objeto com o erro', () => {
       expect(res.body).to.be.an('object');
     });
 
-    it('O retorno deve ser uma mensagem de erro', async () => {
+    it('O retorno deve ser uma mensagem de erro', () => {
       expect(res.body.error).to.be.equal('Nenhuma task encontrada');
     });
 
