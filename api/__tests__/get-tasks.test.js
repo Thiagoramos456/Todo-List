@@ -33,6 +33,10 @@ describe('GET /tasks', () => {
     it('O retorno deve ser um array de tasks', async () => {
       expect(res.body).to.be.deep.equal(tasksMock);
     });
+
+    after(() => {
+      connection.execute.restore();
+    });
   });
 
   describe('Quando não há tasks', () => {
@@ -51,6 +55,10 @@ describe('GET /tasks', () => {
 
     it('O retorno deve ser uma mensagem de erro', async () => {
       expect(res.body).to.be.equal('Nenhuma task encontrada');
+    });
+
+    after(() => {
+      connection.execute.restore();
     });
   });
 });
