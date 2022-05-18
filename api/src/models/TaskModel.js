@@ -1,6 +1,11 @@
 const connection = require('./connection');
 
-export async function getAll() {
+async function getAll() {
   const [tasks] = await connection.execute('SELECT * FROM tasks');
   return tasks;
 }
+
+
+module.exports = {
+  getAll,
+};

@@ -1,11 +1,11 @@
-import * as sinon from 'sinon';
-import * as chai from 'chai';
-import * as chaiHttp from 'chai-http';
+const sinon = require('sinon');
+const chai = require('chai');
+const chaiHttp = require('chai-http');
 
 chai.use(chaiHttp);
 
-import { app } from '../app';
-import tasksMock from './mocks/tasks';
+const app = require('../src/index');
+const tasksMock = require('./mocks/tasks');
 
 const { expect } = chai;
 

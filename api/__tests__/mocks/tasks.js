@@ -25,4 +25,4 @@ const tasksMock = [
   },
 ];
 
-export default tasksMock;
+module.exports = tasksMock;
