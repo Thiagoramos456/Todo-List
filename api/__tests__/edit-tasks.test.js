@@ -5,18 +5,18 @@ const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 
 const app = require('../src/index');
-const { correctTaskMock } = require('./mocks/postTask');
-const connection = require('../src/models/connection');
+const { correctAlterMock } = require('./mocks/editTask');
+const TaskModel = require('../src/models/TaskModel');
 
 const { expect } = chai;
 
-describe('PUT /tasks/:id', () => {
+describe('PUT /tasks', () => {
   let res;
 
   describe('Quando a task é editada com sucesso', () => {
     before(async () => {
-      sinon.stub(connection, 'execute').resolves();
-      res = await chai.request(app).post('/tasks').send(correctTaskMock);
+      sinon.stub(TaskModel, 'edit').resolves();
+      res = await chai.request(app).put('/tasks').send(correctAlterMock);
     });
 
     it('O status deve ser 200 OK', () => {
@@ -32,7 +32,7 @@ describe('PUT /tasks/:id', () => {
     });
 
     after(() => {
-      TaskModel.create.restore();
+      TaskModel.edit.restore();
     });
   });
 });

@@ -18,7 +18,16 @@ async function create(req, res) {
   return res.status(response.status).json({ message: response.message });
 }
 
+async function edit(req, res) {
+  const task = req.body;
+  
+  const response = await TaskService.edit(task);
+
+  return res.status(response.status).json({ message: response.message });
+}
+
 module.exports = {
   getAll,
   create,
+  edit
 };
