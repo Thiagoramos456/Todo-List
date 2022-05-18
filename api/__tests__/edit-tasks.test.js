@@ -6,21 +6,21 @@ chai.use(chaiHttp);
 
 const app = require('../src/index');
 const { correctTaskMock } = require('./mocks/postTask');
-const TaskModel = require('../src/models/TaskModel');
+const connection = require('../src/models/connection');
 
 const { expect } = chai;
 
-describe('POST /tasks', () => {
+describe('PUT /tasks/:id', () => {
   let res;
 
-  describe('Quando a task é criada com sucesso', () => {
+  describe('Quando a task é editada com sucesso', () => {
     before(async () => {
-      sinon.stub(TaskModel, 'create').resolves();
+      sinon.stub(connection, 'execute').resolves();
       res = await chai.request(app).post('/tasks').send(correctTaskMock);
     });
 
-    it('O status deve ser 201 CREATED', () => {
-      expect(res).to.have.status(201);
+    it('O status deve ser 200 OK', () => {
+      expect(res).to.have.status(200);
     });
 
     it('O retorno deve ser conter um objeto com uma mensagem', () => {
@@ -28,7 +28,7 @@ describe('POST /tasks', () => {
     });
 
     it('O retorno deve ser uma mensagem de sucesso', () => {
-      expect(res.body.message).to.be.equal('Tarefa criada com sucesso');
+      expect(res.body.message).to.be.equal('Tarefa alterada com sucesso');
     });
 
     after(() => {

@@ -12,7 +12,15 @@ async function create({ title, description, status }) {
   );
 }
 
+async function edit({ title, description, status, id }) {
+  await connection.execute(
+    'UPDATE tasks SET title = ?, description = ?, status = ? WHERE id = ?',
+    [title, description, status, id],
+  );
+}
+
 module.exports = {
   getAll,
   create,
+  edit,
 };
