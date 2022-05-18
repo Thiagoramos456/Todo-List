@@ -30,8 +30,17 @@ async function edit(task) {
   }
 }
 
+async function exclude(id) {
+  await TaskModel.exclude(id);
+  return {
+    message: 'Tarefa excluída com sucesso',
+    status: 200,
+  }
+}
+
 module.exports = {
   getAll,
   create,
   edit,
+  exclude,
 };
