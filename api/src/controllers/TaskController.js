@@ -26,6 +26,14 @@ async function edit(req, res) {
   return res.status(response.status).json({ message: response.message });
 }
 
+async function exclude(req, res) {
+  const { id } = req.params;
+  
+  const response = await TaskService.exclude(id);
+
+  return res.status(response.status).json({ message: response.message });
+}
+
 module.exports = {
   getAll,
   create,
