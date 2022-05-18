@@ -11,3 +11,5 @@ app.use('/tasks', TaskRouter)
 app.listen(PORT, () => {
   console.log(`API rodando na porta: ${PORT}`);
 });
+
+module.exports = app;

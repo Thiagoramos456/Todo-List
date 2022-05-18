@@ -1,8 +1,8 @@
 const TaskService = require('../services/TaskService');
 
-async function getAll() {
+async function getAll(_req, res) {
   const tasks = await TaskService.getAll();
-  return tasks;
+  return res.status(200).json(tasks);
 }
 
 module.exports = {
