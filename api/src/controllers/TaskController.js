@@ -37,5 +37,6 @@ async function exclude(req, res) {
 module.exports = {
   getAll,
   create,
-  edit
+  edit,
+  exclude,
 };

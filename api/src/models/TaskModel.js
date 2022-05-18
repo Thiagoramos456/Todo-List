@@ -19,8 +19,16 @@ async function edit({ title, description, status, id }) {
   );
 }
 
+async function exclude(id) {
+  await connection.execute(
+    'DELETE FROM tasks WHERE id = ?',
+    [id],
+  );
+}
+
 module.exports = {
   getAll,
   create,
   edit,
+  exclude
 };
