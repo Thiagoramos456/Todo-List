@@ -12,10 +12,10 @@ async function create({ title, description, status }) {
   );
 }
 
-async function edit({ title, description, status, id }) {
+async function edit({ title, description, id }) {
   await connection.execute(
-    'UPDATE tasks SET title = ?, description = ?, status = ? WHERE id = ?',
-    [title, description, status, id],
+    'UPDATE tasks SET title = ?, description = ? WHERE id = ?',
+    [title, description, id],
   );
 }
 
