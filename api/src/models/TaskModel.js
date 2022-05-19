@@ -5,10 +5,10 @@ async function getAll() {
   return tasks ? tasks : [];
 }
 
-async function create({ title, status }) {
+async function create({ title }) {
   await connection.execute(
     'INSERT INTO tasks (title) VALUES (?)',
-    [title, status],
+    [title],
   );
 }
 

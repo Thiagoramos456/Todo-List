@@ -37,8 +37,6 @@ async function exclude(req, res) {
 async function changeStatus(req, res) {
   const task = req.body;
 
-  console.log(task);
-
   const response = await TaskService.changeStatus(task);
 
   if (response.error) {
