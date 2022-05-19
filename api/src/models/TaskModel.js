@@ -26,9 +26,17 @@ async function exclude(id) {
   );
 }
 
+async function changeStatus({ id, status }) {
+  await connection.execute(
+    'UPDATE tasks SET status = ? WHERE id = ?',
+    [status, id],
+  );
+}
+
 module.exports = {
   getAll,
   create,
   edit,
-  exclude
+  exclude,
+  changeStatus,
 };
