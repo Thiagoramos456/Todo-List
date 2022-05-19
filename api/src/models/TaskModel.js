@@ -5,17 +5,17 @@ async function getAll() {
   return tasks ? tasks : [];
 }
 
-async function create({ title, description, status }) {
+async function create({ title, status }) {
   await connection.execute(
-    'INSERT INTO tasks (title, description, status) VALUES (?, ?, ?)',
-    [title, description, status],
+    'INSERT INTO tasks (title) VALUES (?)',
+    [title, status],
   );
 }
 
-async function edit({ title, description, id }) {
+async function edit({ title, id }) {
   await connection.execute(
-    'UPDATE tasks SET title = ?, description = ? WHERE id = ?',
-    [title, description, id],
+    'UPDATE tasks SET title = ? WHERE id = ?',
+    [title, id],
   );
 }
 
