@@ -34,9 +34,24 @@ async function exclude(req, res) {
   return res.status(response.status).json({ message: response.message });
 }
 
+async function changeStatus(req, res) {
+  const task = req.body;
+
+  console.log(task);
+
+  const response = await TaskService.changeStatus(task);
+
+  if (response.error) {
+    return res.status(response.status).json({ error: response.error });
+  }
+
+  return res.status(response.status).json({ message: response.message });
+}
+
 module.exports = {
   getAll,
   create,
   edit,
   exclude,
+  changeStatus
 };
