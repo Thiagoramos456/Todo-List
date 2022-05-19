@@ -38,6 +38,22 @@ async function exclude(id) {
   }
 }
 
+async function changeStatus(task) {
+  const isChanged = await TaskModel.changeStatus(task);
+
+  if (!isChanged) {
+    return {
+      error: 'Tarefa não encontrada.',
+      status: 404,
+    };
+  }
+
+  return {
+    message: 'Status alterado com sucesso.',
+    status: 200,
+  };
+}
+
 module.exports = {
   getAll,
   create,
