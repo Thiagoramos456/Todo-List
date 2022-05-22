@@ -1,32 +1,62 @@
-import * as sinon from 'sinon';
-import * as chai from 'chai';
-import * as chaiHttp from 'chai-http';
+const sinon = require('sinon');
+const chai = require('chai');
+const chaiHttp = require('chai-http');
 
 chai.use(chaiHttp);
 
-import { app } from '../app';
-import tasksMock from './mocks/tasks';
+const connection = require('../src/models/connection');
+const app = require('../src/index');
+
+const tasksMock = require('./mocks/getTasks');
 
 const { expect } = chai;
 
 describe('GET /tasks', () => {
-  
-  it('Deve retornar todas as tasks', async () => {
-    const getAllStub = sinon.stub();
-    getAllStub.returns(tasksMock);
+  let res;
 
-    const controller = {
-      getAll: getAllStub
-    };
+  describe('Quando há tasks', () => {
+    before(async () => {
+      sinon.stub(connection, 'execute').resolves([tasksMock]);
+      res = await chai.request(app).get('/tasks');
+    });
 
-    const server = app(controller);
+    it('O status deve ser 200 OK', async () => {
+      expect(res).to.have.status(200);
+    });
 
-    const res = await chai.request(server)
-      .get('/tasks');
+    it('O retorno deve ser um array', async () => {
+      expect(res.body).to.be.an('array');
+    });
 
-    expect(res).to.have.status(200);
-    expect(res.body).to.be.an('array');
-    expect(res.body).to.have.length(3);
+    it('O retorno deve ser um array de tasks', async () => {
+      expect(res.body).to.be.deep.equal(tasksMock);
+    });
+
+    after(() => {
+      connection.execute.restore();
+    });
   });
 
+  describe('Quando não há tasks', () => {
+    before(async () => {
+      sinon.stub(connection, 'execute').resolves([]);
+      res = await chai.request(app).get('/tasks');
+    });
+
+    it('O status deve ser 404 NOT FOUND', () => {
+      expect(res).to.have.status(404);
+    });
+
+    it('O retorno deve ser um objeto com o erro', () => {
+      expect(res.body).to.be.an('object');
+    });
+
+    it('O retorno deve ser uma mensagem de erro', () => {
+      expect(res.body.error).to.be.equal('Nenhuma task encontrada');
+    });
+
+    after(() => {
+      connection.execute.restore();
+    });
+  });
 });
